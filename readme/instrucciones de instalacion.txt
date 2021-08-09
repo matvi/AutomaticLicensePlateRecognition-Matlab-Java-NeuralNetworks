@@ -1,0 +1,14 @@
+1.- Ejecutar el archivo MCRInstaller.exe, es la maquina virtual de Matlab, esencial para correr los programas de Matlab
+
+2.- Instalar MySQL y crear la base de datos como viene especificado en el archivo BDLPR.txt, la contraseña de root es toor
+
+
+3.- Guardar el archivo sample.dat en el directorio C:/
+
+4.- Guardar la carpeta jarOCR en el directorio C:/
+
+5.- Por ultimo ejecuta la aplicacion ALPR_v2_ITSPV.exe para ejecutar la aplicacion. Una vez dentro, ve al menu de configuracion y
+carga el folder jarOCR que guardaste en el directorio c:/
+
+
+Para mayor informacion lea el manual de usuario para manejo de la aplicacion.

@@ -1,0 +1,67 @@
+mysql> create database parkingdb
+
+
+mysql>create table usuarios(id_usuario varchar(8), tipo varchar(15),
+ nombre varchar(20), apellido varchar(20), id_placa varchar(7), dir_img varchar(150));
+mysql> describe usuarios;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id_usuario | varchar(8)   | NO   | PRI |         |       |
+| tipo       | varchar(15)  | YES  |     | NULL    |       |
+| nombre     | varchar(20)  | YES  |     | NULL    |       |
+| apellido   | varchar(20)  | YES  |     | NULL    |       |
+| id_placa   | varchar(7)   | YES  |     | NULL    |       |
+| dir_img    | varchar(150) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+
+
+mysql> create table automovil (id_placa varchar(7), modelo varchar(20),
+ color varchar(15), dir_img varchar(150), primary key(id_placa));
+mysql> describe automovil;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id_placa | varchar(7)   | NO   | PRI |         |       |
+| modelo   | varchar(20)  | YES  |     | NULL    |       |
+| color    | varchar(15)  | YES  |     | NULL    |       |
+| dir_img  | varchar(150) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+
+mysql> create table registroentrada(id_registroEntrada int(10) not null auto_increment, id_usuario varchar(8), id_placa varchar(7), fecha_ingreso datetime, primary key(id_registroEntrada));
+mysql> describe registroentrada;
++--------------------+------------+------+-----+---------+----------------+
+| Field              | Type       | Null | Key | Default | Extra          |
++--------------------+------------+------+-----+---------+----------------+
+| id_registroEntrada | int(10)    | NO   | PRI | NULL    | auto_increment |
+| id_usuario         | varchar(8) | YES  |     | NULL    |                |
+| id_placa           | varchar(7) | YES  |     | NULL    |                |
+| fecha_ingreso      | datetime   | YES  |     | NULL    |                |
++--------------------+------------+------+-----+---------+----------------+
+
+A partir de aqui es lo importante, lo siguiente solo fue para pruebas.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+mysql> create table registroSalida(id_registroSalida int(10) not null auto_increment, id_usuario int(8),
+ id_auto int(5), fecha_salida datetime, primary key(id_registroSalida));
+
+
+//ingresamos informacion a la base de datos
+mysql> insert into usuario (id_auto,tipo,nombre,apellido,dir_img) values (00001,"Estudiante", "David", "Mata Viejo", "C:\Users\david\Pictures\Camera Roll\david.jpg");
+
+insert into usuario values (09020643, 00001,
+"Estudiante", "David", "Mata Viejo", "C:\Users\david\Pictures\Camera Roll\david.
+jpg");
+
+mysql> insert into automovil (placa, modelo, color, dir_img) values ("JKC1636",
+"HONDA", "GRIS", "C:\Users\david\Dropbox\proyecto LPR\snapshot jal\DSC_0633.jpg"
+);
+
+//INSERTAR DATOS EN LA TABLA REGISTROENTRADA
+mysql> select registroentrada.id_registroEntrada, usuarios.tipo, usuarios.id_usu
+ario, usuarios.nombre,usuarios.apellido, registroentrada.fecha_ingreso from regi
+stroentrada,usuarios where registroentrada.id_usuario =usuarios.id_usuario;
+
+
+//rellenar la tabla de registros de matlab
+mysql> select registroentrada.id_registroEntrada, registroentrada.fecha_ingreso,usuarios.nombre from registroentrada,usuarios where registroentrada.id_usuario=usuarios.id_usuario;
